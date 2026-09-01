@@ -218,14 +218,18 @@
     color:var(--text-faint); text-align:center; padding:20px;
     background:
       repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);
+    overflow:hidden;
   }
+  .shot-placeholder img{ width:100%; height:100%; object-fit:cover; border-radius:8px; }
   .shot-placeholder span{ font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted); }
   .shot-placeholder small{ font-size:0.72rem; }
   .shot-thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
   .shot-thumb{
     aspect-ratio:4/3; border:1px dashed var(--border-soft); border-radius:8px;
     display:flex; align-items:center; justify-content:center; text-align:center; padding:6px;
+    overflow:hidden;
   }
+  .shot-thumb img{ width:100%; height:100%; object-fit:cover; border-radius:6px; }
   .shot-thumb span{ font-size:0.62rem; font-family:var(--font-mono); color:var(--text-faint); }
 
   .project-body{ padding:28px 30px; }
@@ -468,19 +472,12 @@
         <article class="project-card reveal" id="proj-wheelem">
           <div class="project-media">
             <div class="shot-placeholder">
-              <img src = "screenshot/wheel_em_3.jpg" alt = "Sales Page">
-              <small>Dashboard — screenshot to be added</small>
+              <img src="screenshot/wheel_em_3.png" alt="Wheel'em POS &amp; Inventory System — account page">
             </div>
             <div class="shot-thumbs" role="list" aria-label="Additional screenshots">
-              <div class="shot-thumb" role="listitem">
-                <img src = "screenshot/wheel_em_1.jpg" alt = "Login Page">
-              </div>
-              <div class="shot-thumb" role="listitem">
-                <img src = "screenshot/wheel_em_2.jpg" alt = "Dashboard Page">
-              </div>
-              <div class="shot-thumb" role="listitem">
-                <img src = "screenshot/wheel_em_3.jpg" alt = "Account Page">
-              </div>
+              <div class="shot-thumb" role="listitem"><img src="screenshot/wheel_em_1.png" alt="Wheel'em — login page"></div>
+              <div class="shot-thumb" role="listitem"><img src="screenshot/wheel_em_2.png" alt="Wheel'em — dashboard page"></div>
+              <div class="shot-thumb" role="listitem"><img src="screenshot/wheel_em_3.png" alt="Wheel'em — account page"></div>
             </div>
           </div>
           <div class="project-body">
@@ -496,7 +493,7 @@
             </div>
 
             <ul class="feature-list">
-              <li>Point-of-sale transactions with receipt generation</li>
+              <li>Point-of-sale transactions with receipt generation, supporting cash and GCash</li>
               <li>Inventory &amp; product management, including size, color, and style variants</li>
               <li>Role-based access for Owner, Cashier, and Stocker</li>
               <li>Machine-learning-based sales &amp; inventory forecasting</li>
@@ -504,7 +501,7 @@
 
             <div class="project-actions">
               <button class="btn btn-outline" data-open-modal="modal-wheelem">View Details</button>
-              <a href="https://github.com/dhey-blip/capstone_project_wheel_em" class="btn btn-ghost">GitHub →</a>
+              <a href="https://github.com/dhey-blip/capstone_project_wheel_em" class="btn btn-ghost" target="_blank" rel="noopener">GitHub →</a>
             </div>
           </div>
         </article>
@@ -526,20 +523,20 @@
             <span class="project-type">Subject Project</span>
             <h3>SecureEntry</h3>
             <p class="project-desc">A Django web application that manages entry records using QR codes — generating a unique QR code per entry and scanning it back for verification, with automated notifications and activity logging built in.</p>
- 
+
             <div class="tag-row">
               <span class="tag">Django (Python)</span><span class="tag">PostgreSQL</span>
               <span class="tag">HTML</span><span class="tag">CSS</span>
               <span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span>
             </div>
- 
+
             <ul class="feature-list">
               <li>QR code generation for entry records</li>
               <li>Camera-based QR code scanning &amp; verification</li>
               <li>Automated email notifications</li>
               <li>Audit logging &amp; admin dashboard</li>
             </ul>
- 
+
             <div class="project-actions">
               <button class="btn btn-outline" data-open-modal="modal-secureentry">View Details</button>
               <a href="https://github.com/dhey-blip/secureentry/tree/secre" class="btn btn-ghost" target="_blank" rel="noopener">GitHub →</a>
@@ -633,11 +630,11 @@
       <div class="contact-grid reveal">
         <a href="mailto:%5BEMAIL%5D" class="contact-card">
           <span class="fact-label">Email</span>
-          <span class="contact-value">[EMAIL]</span>
+          <span class="contact-value">franciscodarhei@gmail.com</span>
         </a>
         <a href="#" class="contact-card">
           <span class="fact-label">LinkedIn</span>
-          <span class="contact-value">[LINKEDIN URL]</span>
+          <span class="contact-value">https://www.linkedin.com/in/dan-rhei-francisco-64794241a/</span>
         </a>
         <a href="https://github.com/dhey-blip" class="contact-card" target="_blank" rel="noopener">
           <span class="fact-label">GitHub</span>
@@ -667,17 +664,24 @@
     <p>A web-based Point-of-Sale and Inventory Management System built for Wheel'em Clothing Line, covering sales, inventory, products, user roles, reporting, and forecasting in one system.</p>
 
     <h4 class="modal-sub">Objective</h4>
-    <p>To develop a web-based POS and inventory system capable of tracking sales and inventory while generating sales and inventory forecasts to support day-to-day operations.</p>
+    <p>To design and develop a POS and inventory system for Wheel'em Clothing Line that streamlines sales transaction processing with support for multiple payment options, enables real-time inventory tracking with automatic stock deduction, and produces consistent, timely sales and inventory reports — incorporating machine-learning-based forecasting to improve demand prediction and stock management.</p>
 
     <h4 class="modal-sub">Problem</h4>
-    <p>[ADD INFORMATION]</p>
+    <p>The capstone was guided by the following research questions:</p>
+    <ul class="feature-list">
+      <li>What were the existing procedures and key challenges in processing customer purchases, tracking inventory (including size, color, and style variations), and generating accurate, real-time sales and inventory reports?</li>
+      <li>What core features would resolve those issues — including streamlined transaction processing with multiple payment options (cash, GCash), real-time inventory tracking with automatic stock deduction, and consistent reporting with restocking alerts?</li>
+      <li>What software development methodology would best support the system's scalability, adaptability, and responsiveness?</li>
+      <li>What machine learning algorithm would improve sales and inventory forecasting accuracy?</li>
+      <li>How acceptable is the developed system based on ISO/IEC 25010:2011 software quality standards — functionality, performance efficiency, compatibility, usability, reliability, security, maintainability, and portability?</li>
+    </ul>
 
     <h4 class="modal-sub">Solution</h4>
-    <p>A single system that handles point-of-sale transactions, tracks inventory in real time across product variants (size, color, style), enforces role-based access for Owner, Cashier, and Stocker accounts, and applies machine-learning-based forecasting to historical sales data.</p>
+    <p>A single system that handles point-of-sale transactions with support for multiple payment options (cash and GCash), tracks inventory in real time across product variants (size, color, style) with automatic stock deduction, enforces role-based access for Owner, Cashier, and Stocker accounts, and applies machine-learning-based forecasting to historical sales data. The system's quality was evaluated against ISO/IEC 25010:2011 standards.</p>
 
     <h4 class="modal-sub">Features</h4>
     <ul class="feature-list">
-      <li>Point-of-sale transactions &amp; receipt generation</li>
+      <li>Point-of-sale transactions &amp; receipt generation, with support for multiple payment options (cash, GCash)</li>
       <li>Inventory management with real-time stock updates and low-stock notifications</li>
       <li>Product &amp; product variant management (size, color, style)</li>
       <li>Role-based access — Owner, Cashier, Stocker</li>
@@ -699,19 +703,18 @@
     <p>Forecasting uses Python, trained on historical manual transaction data from 2021–2024 and system-generated transactions beginning in 2025. Sales forecasting uses a Linear Regression model; inventory forecasting uses a Random Forest model. Results are visualized with Chart.js.</p>
 
     <h4 class="modal-sub">Development</h4>
-    <p>[ADD INFORMATION — describe Dan Rhei's individual contribution to the capstone team, e.g. modules built, frontend/backend split]</p>
+    <p>My role on this capstone was full-stack developer — I worked across both the frontend interfaces and the backend application logic to bring the system together.</p>
+
 
     <h4 class="modal-sub">Screenshots</h4>
     <div class="modal-shots">
-      <div class="shot-thumb"><span>Screenshot to be added</span></div>
-      <div class="shot-thumb"><span>Screenshot to be added</span></div>
-      <div class="shot-thumb"><span>Screenshot to be added</span></div>
-      <div class="shot-thumb"><span>Screenshot to be added</span></div>
+      <div class="shot-thumb"><img src="screenshot/wheel_em_1.png" alt="Wheel'em — login page"></div>
+      <div class="shot-thumb"><img src="screenshot/wheel_em_2.png" alt="Wheel'em — dashboard page"></div>
+      <div class="shot-thumb"><img src="screenshot/wheel_em_3.png" alt="Wheel'em — account page"></div>
     </div>
 
     <div class="project-actions" style="margin-top:22px;">
-      <a href="[ADD GITHUB REPOSITORY URL]" class="btn btn-outline">GitHub →</a>
-      <a href="[ADD LIVE DEMO URL IF AVAILABLE]" class="btn btn-ghost">Live Demo →</a>
+      <a href="https://github.com/dhey-blip/capstone_project_wheel_em" class="btn btn-outline" target="_blank" rel="noopener">GitHub →</a>
     </div>
   </div>
 </div>
@@ -720,36 +723,43 @@
 <div class="modal-overlay" id="modal-secureentry" role="dialog" aria-modal="true" aria-labelledby="modal-secureentry-title" hidden>
   <div class="modal-panel">
     <button class="modal-close" data-close-modal aria-label="Close details">✕</button>
-    <span class="project-type">[ADD PROJECT TYPE]</span>
+    <span class="project-type">Subject Project</span>
     <h3 id="modal-secureentry-title">SecureEntry</h3>
 
     <h4 class="modal-sub">Project Overview</h4>
-    <p>[ADD INFORMATION]</p>
+    <p>SecureEntry is a Django web application built around QR codes: it generates a unique QR code for each entry record and reads that code back through a camera to verify it, logging the activity along the way.</p>
 
     <h4 class="modal-sub">Objective</h4>
-    <p>[ADD INFORMATION]</p>
+    <p>Built to fulfill a course/subject requirement, with a personal focus on exploring QR code generation and scanning as a practical, hands-on application of the Django framework.</p>
 
     <h4 class="modal-sub">Problem</h4>
-    <p>[ADD INFORMATION]</p>
+    <p>Since this project used a language and framework (Django) that were new, a key part of the challenge was learning Django hands-on while building the system, rather than applying prior experience with it.</p>
 
     <h4 class="modal-sub">Solution</h4>
-    <p>[ADD INFORMATION]</p>
+    <p>Each entry gets a generated QR code (via the <code>qrcode</code> library) that's stored and later decoded using <code>OpenCV</code> and <code>pyzbar</code> for camera-based scanning. Verified entries trigger automated email notifications through SendGrid, get written to an audit log, and are visible through an admin dashboard.</p>
 
     <h4 class="modal-sub">Features</h4>
     <ul class="feature-list">
-      <li>[ADD CONFIRMED FEATURE]</li>
-      <li>[ADD CONFIRMED FEATURE]</li>
-      <li>[ADD CONFIRMED FEATURE]</li>
+      <li>QR code generation for entry records</li>
+      <li>Camera-based QR code scanning &amp; verification</li>
+      <li>Automated email notifications (SendGrid)</li>
+      <li>Audit / activity logging</li>
+      <li>Admin dashboard for managing entries</li>
+      <li>PDF generation (ReportLab)</li>
     </ul>
 
     <h4 class="modal-sub">Technology Stack</h4>
     <div class="tag-row">
-      <span class="tag">Django (Python)</span><span class="tag">HTML</span><span class="tag">CSS</span>
+      <span class="tag">Django (Python)</span><span class="tag">PostgreSQL</span>
+      <span class="tag">HTML</span><span class="tag">CSS</span>
       <span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span>
+      <span class="tag">OpenCV</span><span class="tag">pyzbar</span>
+      <span class="tag">Cloudinary</span><span class="tag">Redis</span>
     </div>
+    <p style="margin-top:10px; font-size:0.8rem; color:var(--text-faint);">Stack confirmed from the project's <code>requirements.txt</code> and app structure (<code>entries</code>, <code>audit</code>, <code>dashboard</code>, <code>notifications</code>, <code>media/qr_codes</code>).</p>
 
     <h4 class="modal-sub">Development</h4>
-    <p>[ADD INFORMATION — describe Dan Rhei's individual contribution to this project]</p>
+    <p>My role on this project was full-stack developer — working across both the frontend and backend while learning Django along the way.</p>
 
     <h4 class="modal-sub">Screenshots</h4>
     <div class="modal-shots">
@@ -758,8 +768,7 @@
     </div>
 
     <div class="project-actions" style="margin-top:22px;">
-      <a href="[ADD SECUREENTRY GITHUB URL]" class="btn btn-outline">GitHub →</a>
-      <a href="[ADD SECUREENTRY LIVE DEMO URL IF AVAILABLE]" class="btn btn-ghost">Live Demo →</a>
+      <a href="https://github.com/dhey-blip/secureentry/tree/secre" class="btn btn-outline" target="_blank" rel="noopener">GitHub →</a>
     </div>
   </div>
 </div>
