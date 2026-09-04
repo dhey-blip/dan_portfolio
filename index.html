@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dan Rhei S. Francisco | Web Developer &amp; Programmer</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0c0f'/%3E%3Crect x='1' y='1' width='62' height='62' rx='13' fill='none' stroke='%23262b33' stroke-width='2'/%3E%3Ctext x='11' y='42' font-family='JetBrains Mono, monospace' font-size='26' font-weight='600' fill='%23e3b341'%3E%3E_%3C/text%3E%3C/svg%3E">
-<meta name="description" content="Portfolio of Dan Rhei S. Francisco, a Bachelor of Science in Information Systems graduate showcasing web development projects, programming skills, and database-driven applications.">
+<meta name="description" content="Portfolio of Dan Rhei S. Francisco, a junior/fresh graduate Web Developer with a BS in Information Systems, showcasing full-stack projects built with PHP, Python, Django, and MySQL/PostgreSQL.">
 
 <meta property="og:title" content="Dan Rhei S. Francisco | Web Developer &amp; Programmer">
-<meta property="og:description" content="Portfolio of Dan Rhei S. Francisco, a Bachelor of Science in Information Systems graduate showcasing web development projects, programming skills, and database-driven applications.">
+<meta property="og:description" content="Portfolio of Dan Rhei S. Francisco, a junior/fresh graduate Web Developer with a BS in Information Systems, showcasing full-stack projects built with PHP, Python, Django, and MySQL/PostgreSQL.">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,16 +100,21 @@
   /* ---------- Nav ---------- */
   header{
     position:fixed; top:0; left:0; right:0; z-index:50;
-    backdrop-filter:blur(14px);
-    background:rgba(10,12,15,0.72);
+    background-color:#0a0c0f !important;
+    opacity:1 !important;
     border-bottom:1px solid var(--border-soft);
   }
-  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:68px;}
-  .brand{ font-family:var(--font-mono); font-size:0.95rem; color:var(--text); display:flex; align-items:center; gap:10px;}
-  .brand .dot{ width:8px; height:8px; background:var(--accent); border-radius:1px; box-shadow:0 0 12px var(--accent-soft-2);}
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:68px; gap:12px; }
+  .brand{
+    font-family:var(--font-mono); font-size:0.95rem; color:var(--text);
+    display:flex; align-items:center; gap:10px; min-width:0; overflow:hidden;
+    white-space:nowrap; text-overflow:ellipsis; flex:1 1 auto;
+  }
+  .brand .dot{ width:8px; height:8px; background:var(--accent); border-radius:1px; box-shadow:0 0 12px var(--accent-soft-2); flex-shrink:0; }
   .brand span{ color:var(--text-faint); }
+  .brand .brand-full{ overflow:hidden; text-overflow:ellipsis; }
 
-  .nav-links{ display:flex; gap:8px; align-items:center; }
+  .nav-links{ display:flex; gap:8px; align-items:center; flex-shrink:0; }
   .nav-links a{
     font-family:var(--font-mono);
     font-size:0.82rem;
@@ -121,18 +126,30 @@
   .nav-links a:hover, .nav-links a:focus-visible{ color:var(--text); background:var(--surface-2); }
   .nav-links a .idx{ color:var(--accent); margin-right:2px; }
 
-  .hamburger{ display:none; flex-direction:column; gap:5px; background:none; border:none; padding:10px; }
-  .hamburger span{ width:22px; height:2px; background:var(--text); display:block; transition:transform .25s ease, opacity .25s ease; }
+  .hamburger{
+    display:none; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    background-color:#171b21 !important; opacity:1 !important; border:1px solid var(--border); border-radius:8px;
+    width:44px; height:44px; min-width:44px; min-height:44px; flex-shrink:0;
+    position:relative; z-index:60;
+  }
+  .hamburger span{ width:20px; height:2px; background:var(--text); display:block; border-radius:1px; transition:transform .25s ease, opacity .25s ease; }
+  .hamburger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  .hamburger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
   .mobile-menu{
-    display:none; position:fixed; top:68px; left:0; right:0; bottom:0; z-index:49;
-    background:var(--bg); padding:32px 24px; flex-direction:column; gap:4px;
+    display:none; position:fixed; top:68px; left:0; right:0; bottom:0; z-index:55;
+    background-color:#0a0c0f !important; opacity:1 !important; padding:32px 24px; flex-direction:column; gap:4px;
   }
   .mobile-menu.open{ display:flex; }
-  .mobile-menu a{ font-family:var(--font-mono); font-size:1.1rem; padding:16px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);}
+  .mobile-menu a{ font-family:var(--font-mono); font-size:1.1rem; padding:16px 4px; border-bottom:1px solid var(--border-soft); color:var(--text); min-height:44px; display:flex; align-items:center;}
 
   @media (max-width: 780px){
     .nav-links{ display:none; }
     .hamburger{ display:flex; }
+  }
+  @media (max-width: 460px){
+    .brand .brand-full{ display:none; }
   }
 
   /* ---------- Buttons ---------- */
@@ -211,6 +228,8 @@
     transition:border-color .25s ease;
   }
   .project-card:hover{ border-color:var(--accent-dim); }
+  .project-card.no-media{ grid-template-columns:1fr; }
+  .project-card.no-media .project-body{ padding:34px 36px; }
 
   .project-media{ padding:20px; background:var(--surface-2); display:flex; flex-direction:column; gap:12px; border-right:1px solid var(--border-soft); }
   .shot-placeholder{
@@ -221,19 +240,19 @@
       repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);
     overflow:hidden;
   }
-  .shot-placeholder img{ width:100%; height:100%; object-fit:cover; border-radius:8px; }
+  .shot-placeholder img{ width:100%; height:100%; object-fit:cover; border-radius:8px; aspect-ratio:16/10; }
   .shot-placeholder span{ font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted); }
   .shot-placeholder small{ font-size:0.72rem; }
   .shot-thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
   .shot-thumb{
-    aspect-ratio:4/3; border:1px dashed var(--border-soft); border-radius:8px;
+    aspect-ratio:4/3; border:1px solid var(--border-soft); border-radius:8px;
     display:flex; align-items:center; justify-content:center; text-align:center; padding:6px;
     overflow:hidden;
   }
   .shot-thumb img{ width:100%; height:100%; object-fit:cover; border-radius:6px; }
   .shot-thumb span{ font-size:0.62rem; font-family:var(--font-mono); color:var(--text-faint); }
 
-  .project-body{ padding:28px 30px; }
+  .project-body{ padding:28px 30px; min-width:0; }
   .project-type{
     font-family:var(--font-mono); font-size:0.72rem; color:var(--accent);
     text-transform:uppercase; letter-spacing:0.05em; border:1px solid var(--accent-soft-2);
@@ -241,11 +260,22 @@
   }
   .project-body h3{ font-size:1.4rem; margin-bottom:8px; }
   .project-full-title{ font-size:0.82rem; color:var(--text-faint); font-style:italic; margin-bottom:14px; }
-  .project-desc{ color:var(--text-muted); font-size:0.92rem; margin-bottom:18px; }
-  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .project-desc{ color:var(--text-muted); font-size:0.92rem; margin-bottom:20px; }
+
+  .tag-group{ display:flex; flex-direction:column; gap:12px; margin-bottom:22px; }
+  .tag-cluster{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+  .tag-cluster-label{
+    font-family:var(--font-mono); font-size:0.68rem; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:0.05em; min-width:104px; flex-shrink:0;
+  }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; }
   .tag{
     font-family:var(--font-mono); font-size:0.72rem; color:var(--text); background:var(--surface-2);
     border:1px solid var(--border); padding:5px 10px; border-radius:6px;
+  }
+  .feature-label{
+    display:block; font-family:var(--font-mono); font-size:0.72rem; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.05em; margin-bottom:12px;
   }
   .feature-list{ margin-bottom:22px; }
   .feature-list li{
@@ -259,6 +289,8 @@
   @media (max-width: 860px){
     .project-card{ grid-template-columns:1fr; }
     .project-media{ border-right:none; border-bottom:1px solid var(--border-soft); }
+    .tag-cluster{ flex-direction:column; align-items:flex-start; gap:6px; }
+    .tag-cluster-label{ min-width:0; }
   }
 
   /* ---------- Capabilities ---------- */
@@ -270,6 +302,28 @@
   .capability-card p{ color:var(--text-muted); font-size:0.87rem; }
 
   /* ---------- Experience ---------- */
+  .exp-subhead{
+    display:block; font-family:var(--font-mono); font-size:0.78rem; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px;
+  }
+  .inline-link{ color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
+  .inline-link:hover{ color:var(--text); }
+
+  .internship-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px 26px;
+  }
+  .internship-head{
+    display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:16px;
+  }
+  .internship-card h4{ font-size:1.05rem; margin-bottom:4px; }
+  .internship-org{ color:var(--text-muted); font-size:0.88rem; }
+  .internship-dates{
+    font-family:var(--font-mono); font-size:0.76rem; color:var(--accent);
+    border:1px solid var(--accent-soft-2); background:var(--accent-soft); padding:5px 12px; border-radius:20px;
+    white-space:nowrap;
+  }
+  .internship-card .feature-list{ margin-bottom:0; }
+
   .experience-lead{ font-size:1.1rem; color:var(--text); max-width:760px; margin-bottom:40px; font-family:var(--font-display); font-weight:500; line-height:1.5; }
   .exp-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:24px; }
   .exp-item{ border-top:1px solid var(--border); padding-top:16px; }
@@ -325,7 +379,7 @@
 
 <header>
   <nav class="wrap" aria-label="Primary">
-    <a href="#home" class="brand"><span class="dot" aria-hidden="true"></span>dhey-blip <span>/ dan-rhei-francisco</span></a>
+    <a href="#home" class="brand"><span class="dot" aria-hidden="true"></span>dhey-blip <span class="brand-full">/ dan-rhei-francisco</span></a>
     <div class="nav-links">
       <a href="#home"><span class="idx">01</span>Home</a>
       <a href="#about"><span class="idx">02</span>About</a>
@@ -357,10 +411,11 @@
         <span class="eyebrow">available for junior developer roles</span>
         <h1 class="hero-name">Dan Rhei S.<br>Francisco</h1>
         <p class="hero-role">Web Developer&nbsp;|&nbsp;Programmer</p>
-        <p class="hero-intro">I build practical web applications and database-driven systems while continuously improving my skills in web development and programming.</p>
+        <p class="hero-intro">Junior Web Developer building database-driven web applications with PHP, Python, Django, and MySQL — connecting frontend interfaces, backend logic, authentication, and reporting into working business systems.</p>
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary">View My Projects</a>
-          <a href="https://github.com/dhey-blip" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
+          <a href="resume.pdf" class="btn btn-outline" download="Dan_Rhei_Francisco_Resume.pdf">Download Resume</a>
+          <a href="https://github.com/dhey-blip" class="btn btn-ghost" target="_blank" rel="noopener">GitHub →</a>
           <a href="#contact" class="btn btn-ghost">Contact Me →</a>
         </div>
       </div>
@@ -414,40 +469,49 @@
 
       <div class="skills-grid">
         <div class="skill-card reveal">
-          <span class="skill-cat">Frontend Development</span>
-          <h4>Interfaces &amp; layout</h4>
-          <p class="skill-desc">Experience building structured and responsive web interfaces.</p>
+          <span class="skill-cat">Full-Stack Web Development</span>
+          <h4>End-to-end application logic</h4>
+          <p class="skill-desc">Experience developing database-driven web applications and implementing backend application logic across two frameworks.</p>
           <div class="chip-row">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Tailwind CSS</span>
+            <span class="chip">PHP</span><span class="chip">Django</span><span class="chip">Python</span><span class="chip">JavaScript</span>
           </div>
         </div>
 
         <div class="skill-card reveal">
-          <span class="skill-cat">Backend / Web Development</span>
-          <h4>PHP</h4>
-          <p class="skill-desc">Experience developing database-driven web applications and implementing backend application logic.</p>
-          <div class="chip-row"><span class="chip">PHP</span></div>
+          <span class="skill-cat">Frontend Development</span>
+          <h4>Interfaces &amp; layout</h4>
+          <p class="skill-desc">Experience building structured and responsive web interfaces.</p>
+          <div class="chip-row">
+            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Tailwind CSS</span><span class="chip">JavaScript</span>
+          </div>
         </div>
 
         <div class="skill-card reveal">
-          <span class="skill-cat">Backend / Web Development</span>
-          <h4>Python / Django</h4>
-          <p class="skill-desc">Experience developing web applications using Python and the Django framework.</p>
-          <div class="chip-row"><span class="chip">Python</span><span class="chip">Django</span></div>
+          <span class="skill-cat">Database Development</span>
+          <h4>Relational data</h4>
+          <p class="skill-desc">Experience designing and working with relational databases for web-based systems.</p>
+          <div class="chip-row"><span class="chip">MySQL</span><span class="chip">PostgreSQL</span></div>
         </div>
 
         <div class="skill-card reveal">
-          <span class="skill-cat">Database</span>
-          <h4>MySQL</h4>
-          <p class="skill-desc">Experience working with relational databases for web-based systems.</p>
-          <div class="chip-row"><span class="chip">MySQL</span></div>
+          <span class="skill-cat">Business Applications</span>
+          <h4>Operational systems</h4>
+          <p class="skill-desc">Building systems that support real day-to-day business operations, not just demos.</p>
+          <div class="chip-row"><span class="chip">POS</span><span class="chip">Inventory Systems</span><span class="chip">Reporting</span><span class="chip">Dashboards</span></div>
         </div>
 
         <div class="skill-card reveal">
-          <span class="skill-cat">Data / Visualization</span>
-          <h4>Python &amp; Chart.js</h4>
-          <p class="skill-desc">Used for presenting application data through interactive charts and visualizations.</p>
-          <div class="chip-row"><span class="chip">Python</span><span class="chip">Chart.js</span></div>
+          <span class="skill-cat">Data &amp; Forecasting</span>
+          <h4>Applied data processing</h4>
+          <p class="skill-desc">Using Python to process historical data and present it through interactive visualizations.</p>
+          <div class="chip-row"><span class="chip">Python</span><span class="chip">Linear Regression</span><span class="chip">Random Forest</span><span class="chip">Chart.js</span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-cat">Authentication &amp; Access Control</span>
+          <h4>Roles &amp; permissions</h4>
+          <p class="skill-desc">Implementing role-based access so different user types see and do only what they should.</p>
+          <div class="chip-row"><span class="chip">Role-based access</span><span class="chip">Authentication</span><span class="chip">Authorization</span></div>
         </div>
 
         <div class="skill-card reveal">
@@ -485,19 +549,23 @@
             <span class="project-type">Capstone Project</span>
             <h3>Wheel'em POS &amp; Inventory System</h3>
             <p class="project-full-title">Developing a Web-Based POS and Inventory System Featuring Sales and Inventory Forecasting for Wheel'em Clothing Line</p>
-            <p class="project-desc">A web-based POS and inventory management system developed for Wheel'em Clothing Line. The system manages sales, products, inventory, user roles, reporting, and forecasting while using historical transaction data to generate sales and inventory predictions.</p>
+            <p class="project-desc">Full-stack POS and inventory management system built for a clothing business, combining transaction processing, variant-level inventory tracking, role-based access, reporting, and data-driven forecasting.</p>
 
-            <div class="tag-row">
-              <span class="tag">HTML</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span>
-              <span class="tag">Chart.js</span><span class="tag">PHP</span><span class="tag">MySQL</span>
-              <span class="tag">Python</span><span class="tag">XAMPP</span>
+            <div class="tag-group">
+              <div class="tag-cluster"><span class="tag-cluster-label">Frontend</span><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Chart.js</span></div></div>
+              <div class="tag-cluster"><span class="tag-cluster-label">Backend</span><div class="tag-row"><span class="tag">PHP</span><span class="tag">Python (forecasting)</span></div></div>
+              <div class="tag-cluster"><span class="tag-cluster-label">Database</span><div class="tag-row"><span class="tag">MySQL</span></div></div>
+              <div class="tag-cluster"><span class="tag-cluster-label">Development</span><div class="tag-row"><span class="tag">XAMPP</span></div></div>
             </div>
 
+            <span class="feature-label">Key Features</span>
             <ul class="feature-list">
-              <li>Point-of-sale transactions with receipt generation, supporting cash and GCash</li>
-              <li>Inventory &amp; product management, including size, color, and style variants</li>
+              <li>POS transaction processing with receipt generation, supporting cash and GCash</li>
+              <li>Product &amp; variant management — tracking by size, color, and style</li>
               <li>Role-based access for Owner, Cashier, and Stocker</li>
-              <li>Machine-learning-based sales &amp; inventory forecasting</li>
+              <li>Real-time inventory updates with low-stock notifications</li>
+              <li>Sales &amp; inventory reporting, plus activity logging</li>
+              <li>Python-based sales &amp; inventory forecasting, visualized with Chart.js</li>
             </ul>
 
             <div class="project-actions">
@@ -508,29 +576,20 @@
         </article>
 
         <!-- PROJECT 2: SECUREENTRY -->
-        <article class="project-card reveal" id="proj-secureentry">
-          <div class="project-media">
-            <div class="shot-placeholder">
-              <span>Project Screenshot</span>
-              <small>Screenshot to be added</small>
-            </div>
-            <div class="shot-thumbs" role="list" aria-label="Additional screenshots">
-              <div class="shot-thumb" role="listitem"><span>Screenshot to be added</span></div>
-              <div class="shot-thumb" role="listitem"><span>Screenshot to be added</span></div>
-              <div class="shot-thumb" role="listitem"><span>Screenshot to be added</span></div>
-            </div>
-          </div>
+        <article class="project-card no-media reveal" id="proj-secureentry">
           <div class="project-body">
             <span class="project-type">Subject Project</span>
             <h3>SecureEntry</h3>
-            <p class="project-desc">A Django web application that manages entry records using QR codes — generating a unique QR code per entry and scanning it back for verification, with automated notifications and activity logging built in.</p>
+            <p class="project-desc">A full-stack Django access-management system that uses generated QR codes for camera-based entry verification, automated notifications, audit logging, and administrative monitoring.</p>
 
-            <div class="tag-row">
-              <span class="tag">Django (Python)</span><span class="tag">PostgreSQL</span>
-              <span class="tag">HTML</span><span class="tag">CSS</span>
-              <span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span>
+            <div class="tag-group">
+              <div class="tag-cluster"><span class="tag-cluster-label">Frontend</span><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span></div></div>
+              <div class="tag-cluster"><span class="tag-cluster-label">Backend</span><div class="tag-row"><span class="tag">Python</span><span class="tag">Django</span></div></div>
+              <div class="tag-cluster"><span class="tag-cluster-label">Database</span><div class="tag-row"><span class="tag">PostgreSQL</span></div></div>
+              <div class="tag-cluster"><span class="tag-cluster-label">Libraries / Services</span><div class="tag-row"><span class="tag">OpenCV</span><span class="tag">pyzbar</span><span class="tag">Redis</span><span class="tag">Cloudinary</span><span class="tag">SendGrid</span><span class="tag">ReportLab</span></div></div>
             </div>
 
+            <span class="feature-label">Key Features</span>
             <ul class="feature-list">
               <li>QR code generation for entry records</li>
               <li>Camera-based QR code scanning &amp; verification</li>
@@ -571,9 +630,31 @@
   <section id="experience">
     <div class="wrap">
       <div class="section-kicker reveal"><span class="eyebrow">06 · experience</span></div>
-      <h2 class="section-title reveal">Development Experience</h2>
+      <h2 class="section-title reveal">Experience</h2>
+      <p class="section-lede reveal">Professional employment and project-based development experience, kept clearly separate.</p>
+
+      <span class="exp-subhead reveal">Professional Experience</span>
+      <div class="internship-card reveal">
+        <div class="internship-head">
+          <div>
+            <h4>IT Technical Support Intern</h4>
+            <p class="internship-org">Richwell Colleges Inc. — IT Department</p>
+          </div>
+          <span class="internship-dates">March 2026 – June 2026</span>
+        </div>
+        <ul class="feature-list">
+          <li>Assisted with troubleshooting computer hardware and software issues</li>
+          <li>Performed installation and configuration of software and drivers</li>
+          <li>Assisted with printer troubleshooting and maintenance</li>
+          <li>Assisted with network/internet troubleshooting</li>
+          <li>Helped maintain school computer systems</li>
+          <li>Assisted users with technical issues</li>
+        </ul>
+      </div>
+
+      <span class="exp-subhead reveal" style="margin-top:44px;">Project Experience</span>
       <div class="experience-block reveal">
-        <p class="experience-lead">My projects have given me hands-on experience connecting frontend interfaces, backend application logic, databases, and data-processing functionality into complete web-based systems.</p>
+        <p class="experience-lead">My projects have given me hands-on experience connecting frontend interfaces, backend application logic, databases, and data-processing functionality into complete web-based systems — see <a href="#projects" class="inline-link">Wheel'em POS &amp; Inventory System and SecureEntry</a> above.</p>
         <div class="exp-grid">
           <div class="exp-item">
             <span class="exp-num">01</span>
@@ -583,7 +664,7 @@
           <div class="exp-item">
             <span class="exp-num">02</span>
             <h4>Database design</h4>
-            <p>Structuring MySQL tables for users, roles, products, inventory, and transactions.</p>
+            <p>Structuring MySQL and PostgreSQL tables for users, roles, products, inventory, and transactions.</p>
           </div>
           <div class="exp-item">
             <span class="exp-num">03</span>
@@ -611,11 +692,11 @@
   <section id="resume">
     <div class="wrap resume-wrap reveal">
       <div>
-        <h3>Resume</h3>
+        <h3>Résumé</h3>
         <p class="section-lede" style="margin-bottom:0;">A one-page summary of my background, skills, and projects.</p>
       </div>
       <div style="text-align:right;">
-        <a href="resume.pdf" class="btn btn-outline" download>Download Resume</a>
+        <a href="resume.pdf" class="btn btn-outline" download="Dan_Rhei_Francisco_Resume.pdf">Download Resume ↓</a>
       </div>
     </div>
   </section>
@@ -625,16 +706,16 @@
     <div class="wrap">
       <div class="section-kicker reveal"><span class="eyebrow">08 · contact</span></div>
       <h2 class="section-title reveal">Contact</h2>
-      <p class="section-lede reveal">Open to Web Developer, Junior Software Developer, and related programming roles.</p>
+      <p class="section-lede reveal">I'm currently open to junior Web Developer, Software Developer, and related programming opportunities.</p>
 
       <div class="contact-grid reveal">
-        <a href="mailto:%5BEMAIL%5D" class="contact-card">
+        <a href="mailto:franciscodanrhei@gmail.com" class="contact-card">
           <span class="fact-label">Email</span>
           <span class="contact-value">franciscodanrhei@gmail.com</span>
         </a>
-        <a href="#" class="contact-card">
+        <a href="https://www.linkedin.com/in/dan-rhei-francisco-64794241a/" class="contact-card" target="_blank" rel="noopener">
           <span class="fact-label">LinkedIn</span>
-          <span class="contact-value">https://www.linkedin.com/in/dan-rhei-francisco-64794241a/</span>
+          <span class="contact-value">dan-rhei-francisco</span>
         </a>
         <a href="https://github.com/dhey-blip" class="contact-card" target="_blank" rel="noopener">
           <span class="fact-label">GitHub</span>
@@ -661,7 +742,7 @@
     <h3 id="modal-wheelem-title">Wheel'em POS &amp; Inventory System</h3>
 
     <h4 class="modal-sub">Project Overview</h4>
-    <p>A web-based Point-of-Sale and Inventory Management System built for Wheel'em Clothing Line, covering sales, inventory, products, user roles, reporting, and forecasting in one system.</p>
+    <p>Full-stack POS and inventory management system built for a clothing business, combining transaction processing, variant-level inventory tracking, role-based access, reporting, and data-driven forecasting.</p>
 
     <h4 class="modal-sub">Objective</h4>
     <p>To design and develop a POS and inventory system for Wheel'em Clothing Line that streamlines sales transaction processing with support for multiple payment options, enables real-time inventory tracking with automatic stock deduction, and produces consistent, timely sales and inventory reports — incorporating machine-learning-based forecasting to improve demand prediction and stock management.</p>
@@ -679,7 +760,7 @@
     <h4 class="modal-sub">Solution</h4>
     <p>A single system that handles point-of-sale transactions with support for multiple payment options (cash and GCash), tracks inventory in real time across product variants (size, color, style) with automatic stock deduction, enforces role-based access for Owner, Cashier, and Stocker accounts, and applies machine-learning-based forecasting to historical sales data. The system's quality was evaluated against ISO/IEC 25010:2011 standards.</p>
 
-    <h4 class="modal-sub">Features</h4>
+    <span class="feature-label">What I Built — Key Features</span>
     <ul class="feature-list">
       <li>Point-of-sale transactions &amp; receipt generation, with support for multiple payment options (cash, GCash)</li>
       <li>Inventory management with real-time stock updates and low-stock notifications</li>
@@ -693,10 +774,11 @@
     </ul>
 
     <h4 class="modal-sub">Technology Stack</h4>
-    <div class="tag-row">
-      <span class="tag">HTML</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span>
-      <span class="tag">Chart.js</span><span class="tag">PHP</span><span class="tag">MySQL</span>
-      <span class="tag">Python</span><span class="tag">XAMPP</span>
+    <div class="tag-group">
+      <div class="tag-cluster"><span class="tag-cluster-label">Frontend</span><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Chart.js</span></div></div>
+      <div class="tag-cluster"><span class="tag-cluster-label">Backend</span><div class="tag-row"><span class="tag">PHP</span><span class="tag">Python (forecasting)</span></div></div>
+      <div class="tag-cluster"><span class="tag-cluster-label">Database</span><div class="tag-row"><span class="tag">MySQL</span></div></div>
+      <div class="tag-cluster"><span class="tag-cluster-label">Development</span><div class="tag-row"><span class="tag">XAMPP</span></div></div>
     </div>
 
     <h4 class="modal-sub">Forecasting</h4>
@@ -749,23 +831,16 @@
     </ul>
 
     <h4 class="modal-sub">Technology Stack</h4>
-    <div class="tag-row">
-      <span class="tag">Django (Python)</span><span class="tag">PostgreSQL</span>
-      <span class="tag">HTML</span><span class="tag">CSS</span>
-      <span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span>
-      <span class="tag">OpenCV</span><span class="tag">pyzbar</span>
-      <span class="tag">Cloudinary</span><span class="tag">Redis</span>
+    <div class="tag-group">
+      <div class="tag-cluster"><span class="tag-cluster-label">Frontend</span><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span></div></div>
+      <div class="tag-cluster"><span class="tag-cluster-label">Backend</span><div class="tag-row"><span class="tag">Python</span><span class="tag">Django</span></div></div>
+      <div class="tag-cluster"><span class="tag-cluster-label">Database</span><div class="tag-row"><span class="tag">PostgreSQL</span></div></div>
+      <div class="tag-cluster"><span class="tag-cluster-label">Libraries / Services</span><div class="tag-row"><span class="tag">OpenCV</span><span class="tag">pyzbar</span><span class="tag">Redis</span><span class="tag">Cloudinary</span><span class="tag">SendGrid</span><span class="tag">ReportLab</span></div></div>
     </div>
-    <p style="margin-top:10px; font-size:0.8rem; color:var(--text-faint);">Stack confirmed from the project's <code>requirements.txt</code> and app structure (<code>entries</code>, <code>audit</code>, <code>dashboard</code>, <code>notifications</code>, <code>media/qr_codes</code>).</p>
+    <p style="margin-top:2px; font-size:0.8rem; color:var(--text-faint);">Stack confirmed from the project's <code>requirements.txt</code> and app structure (<code>entries</code>, <code>audit</code>, <code>dashboard</code>, <code>notifications</code>, <code>media/qr_codes</code>).</p>
 
     <h4 class="modal-sub">Development</h4>
     <p>My role on this project was full-stack developer — working across both the frontend and backend while learning Django along the way.</p>
-
-    <h4 class="modal-sub">Screenshots</h4>
-    <div class="modal-shots">
-      <div class="shot-thumb"><span>Screenshot to be added</span></div>
-      <div class="shot-thumb"><span>Screenshot to be added</span></div>
-    </div>
 
     <div class="project-actions" style="margin-top:22px;">
       <a href="https://github.com/dhey-blip/secureentry/tree/secre" class="btn btn-outline" target="_blank" rel="noopener">GitHub →</a>
@@ -783,11 +858,13 @@
   hamburgerBtn.addEventListener('click', () => {
     const isOpen = mobileMenu.classList.toggle('open');
     hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
   mobileMenu.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
       hamburgerBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     });
   });
 
