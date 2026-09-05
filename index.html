@@ -371,6 +371,48 @@
   .modal-sub{ font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent); font-family:var(--font-mono); margin:22px 0 8px; }
   .modal-panel p{ color:var(--text-muted); font-size:0.92rem; }
   .modal-shots{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:10px; }
+
+  /* ---------- Clickable screenshot affordance ---------- */
+  .lightbox-trigger{ cursor:zoom-in; transition:opacity .2s ease, transform .2s ease; }
+  .lightbox-trigger:hover{ opacity:0.85; }
+  .lightbox-trigger:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox-overlay{
+    position:fixed; inset:0; z-index:200; background-color:#050607; opacity:1;
+    display:flex; align-items:center; justify-content:center;
+    padding:60px 20px;
+  }
+  .lightbox-overlay[hidden]{ display:none; }
+  .lightbox-img{
+    max-width:min(90vw, 1100px); max-height:80vh; width:auto; height:auto;
+    object-fit:contain; border-radius:10px; border:1px solid var(--border);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);
+  }
+  .lightbox-close{
+    position:absolute; top:20px; right:20px; width:44px; height:44px;
+    background-color:#171b21; color:var(--text); border:1px solid var(--border); border-radius:8px;
+    font-size:1rem; display:flex; align-items:center; justify-content:center; z-index:2;
+  }
+  .lightbox-close:hover{ color:var(--accent); border-color:var(--accent-dim); }
+  .lightbox-nav{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:48px; height:48px; background-color:#171b21; color:var(--text);
+    border:1px solid var(--border); border-radius:50%; font-size:1.6rem;
+    display:flex; align-items:center; justify-content:center; z-index:2;
+  }
+  .lightbox-nav:hover{ color:var(--accent); border-color:var(--accent-dim); }
+  .lightbox-prev{ left:16px; }
+  .lightbox-next{ right:16px; }
+  .lightbox-caption{
+    position:absolute; bottom:22px; left:0; right:0; text-align:center;
+    font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);
+  }
+  @media (max-width:640px){
+    .lightbox-nav{ width:40px; height:40px; font-size:1.3rem; }
+    .lightbox-prev{ left:8px; }
+    .lightbox-next{ right:8px; }
+  }
 </style>
 </head>
 <body>
@@ -537,12 +579,12 @@
         <article class="project-card reveal" id="proj-wheelem">
           <div class="project-media">
             <div class="shot-placeholder">
-              <img src="screenshot/wheel_em_3.png" alt="Wheel'em POS &amp; Inventory System — account page">
+              <img class="lightbox-trigger" data-group="wheelem" src="screenshot/wheel_em_3.png" alt="Wheel'em POS &amp; Inventory System — account page">
             </div>
             <div class="shot-thumbs" role="list" aria-label="Additional screenshots">
-              <div class="shot-thumb" role="listitem"><img src="screenshot/wheel_em_1.png" alt="Wheel'em — login page"></div>
-              <div class="shot-thumb" role="listitem"><img src="screenshot/wheel_em_2.png" alt="Wheel'em — dashboard page"></div>
-              <div class="shot-thumb" role="listitem"><img src="screenshot/wheel_em_3.png" alt="Wheel'em — account page"></div>
+              <div class="shot-thumb" role="listitem"><img class="lightbox-trigger" data-group="wheelem" src="screenshot/wheel_em_1.png" alt="Wheel'em — login page"></div>
+              <div class="shot-thumb" role="listitem"><img class="lightbox-trigger" data-group="wheelem" src="screenshot/wheel_em_2.png" alt="Wheel'em — dashboard page"></div>
+              <div class="shot-thumb" role="listitem"><img class="lightbox-trigger" data-group="wheelem" src="screenshot/wheel_em_3.png" alt="Wheel'em — account page"></div>
             </div>
           </div>
           <div class="project-body">
@@ -692,7 +734,7 @@
   <section id="resume">
     <div class="wrap resume-wrap reveal">
       <div>
-        <h3>Résumé</h3>
+        <h3>Resume</h3>
         <p class="section-lede" style="margin-bottom:0;">A one-page summary of my background, skills, and projects.</p>
       </div>
       <div style="text-align:right;">
@@ -790,9 +832,9 @@
 
     <h4 class="modal-sub">Screenshots</h4>
     <div class="modal-shots">
-      <div class="shot-thumb"><img src="screenshot/wheel_em_1.png" alt="Wheel'em — login page"></div>
-      <div class="shot-thumb"><img src="screenshot/wheel_em_2.png" alt="Wheel'em — dashboard page"></div>
-      <div class="shot-thumb"><img src="screenshot/wheel_em_3.png" alt="Wheel'em — account page"></div>
+      <div class="shot-thumb"><img class="lightbox-trigger" data-group="wheelem" src="screenshot/wheel_em_1.png" alt="Wheel'em — login page"></div>
+      <div class="shot-thumb"><img class="lightbox-trigger" data-group="wheelem" src="screenshot/wheel_em_2.png" alt="Wheel'em — dashboard page"></div>
+      <div class="shot-thumb"><img class="lightbox-trigger" data-group="wheelem" src="screenshot/wheel_em_3.png" alt="Wheel'em — account page"></div>
     </div>
 
     <div class="project-actions" style="margin-top:22px;">
@@ -846,6 +888,15 @@
       <a href="https://github.com/dhey-blip/secureentry/tree/secre" class="btn btn-outline" target="_blank" rel="noopener">GitHub →</a>
     </div>
   </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close image">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous screenshot">‹</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next screenshot">›</button>
+  <span class="lightbox-caption" id="lightboxCaption"></span>
 </div>
 
 <script>
@@ -921,6 +972,77 @@
     if (e.key === 'Escape') {
       document.querySelectorAll('.modal-overlay:not([hidden])').forEach(closeModal);
     }
+  });
+
+  // Lightbox (click a screenshot to view it full-size)
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let lightboxGroupImgs = [];
+  let lightboxIndex = 0;
+  let lightboxLastFocused = null;
+
+  function getGroupImgs(groupName) {
+    return Array.from(document.querySelectorAll(`.lightbox-trigger[data-group="${groupName}"]`))
+      .filter((img, idx, arr) => arr.findIndex(i => i.src === img.src) === idx); // dedupe repeated thumbs
+  }
+
+  function showLightboxAt(index) {
+    if (!lightboxGroupImgs.length) return;
+    lightboxIndex = (index + lightboxGroupImgs.length) % lightboxGroupImgs.length;
+    const img = lightboxGroupImgs[lightboxIndex];
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt || '';
+    lightboxCaption.textContent = img.alt ? `${img.alt} — ${lightboxIndex + 1} / ${lightboxGroupImgs.length}` : `${lightboxIndex + 1} / ${lightboxGroupImgs.length}`;
+    const showNav = lightboxGroupImgs.length > 1;
+    lightboxPrev.style.display = showNav ? 'flex' : 'none';
+    lightboxNext.style.display = showNav ? 'flex' : 'none';
+  }
+
+  function openLightbox(triggerImg) {
+    const groupName = triggerImg.getAttribute('data-group') || 'default';
+    lightboxGroupImgs = getGroupImgs(groupName);
+    const startIndex = lightboxGroupImgs.findIndex(i => i.src === triggerImg.src);
+    lightboxLastFocused = document.activeElement;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    showLightboxAt(startIndex >= 0 ? startIndex : 0);
+    lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+    if (lightboxLastFocused) lightboxLastFocused.focus();
+  }
+
+  document.querySelectorAll('.lightbox-trigger').forEach(img => {
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.addEventListener('click', () => openLightbox(img));
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(img); }
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', () => showLightboxAt(lightboxIndex - 1));
+  lightboxNext.addEventListener('click', () => showLightboxAt(lightboxIndex + 1));
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showLightboxAt(lightboxIndex - 1);
+    if (e.key === 'ArrowRight') showLightboxAt(lightboxIndex + 1);
   });
 
   // Offset anchor scrolling for sticky header
